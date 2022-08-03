@@ -1,6 +1,6 @@
 const CS = {}
 CS.colorlib = ColorLib()
-CS.color = "#000000"
+CS.color = "#252933"
 
 CS.set_color = function (color) {
   let buttons = document.getElementById("buttons")

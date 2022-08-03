@@ -42,6 +42,9 @@ body, html {
   border: 4px solid currentColor;
   padding: 10px;
   cursor: pointer;
+  text-align: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 #buttons div:hover {

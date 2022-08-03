@@ -31,13 +31,7 @@ App.init = function() {
 App.set_color = function (color) {
   App.set_reference(color)
   color = App.get_reference()
-
-  if (color.startsWith("#")) {
-    color = App.colorlib.hex_to_rgb(color)
-  }
-  
-  let buttons = App.el("#buttons")
-  buttons.style.color = App.colorlib.get_lighter_or_darker(color, 0.4)
+  App.el("#buttons").style.color = App.colorlib.get_lighter_or_darker(color, 0.4)
   document.documentElement.style.setProperty("--bg_color", color)
   App.save_local_storage(App.ls_state, {color: color})
 }

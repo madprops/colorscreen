@@ -1,15 +1,21 @@
-const CS = {}
-CS.colorlib = ColorLib()
-CS.color = "#252933"
+const App = {}
+App.ls_state = "state_v1"
+App.colorlib = ColorLib()
+App.color = "#252933"
 
-CS.set_color = function (color) {
+App.set_color = function (color) {
+  if (color.startsWith("#")) {
+    color = App.colorlib.hex_to_rgb(color)
+  }
+  
   let buttons = document.getElementById("buttons")
-  buttons.style.color = CS.colorlib.get_lighter_or_darker(color, 0.4)
+  buttons.style.color = App.colorlib.get_lighter_or_darker(color, 0.4)
   document.documentElement.style.setProperty("--bg_color", color)
-  CS.color = color
+  App.save_local_storage(App.ls_state, {color: color})
+  App.color = color
 }
 
-CS.init = function() {
+App.init = function() {
   document.getElementById("fullscreen_button").addEventListener("click", function() {
     if(document.fullscreenElement) {
       document.exitFullscreen()
@@ -21,15 +27,15 @@ CS.init = function() {
   })
 
   document.getElementById("random_button").addEventListener("click", function() {
-    CS.set_color(CS.colorlib.get_random_hex())
+    App.set_color(App.colorlib.get_random_hex())
   })
 
   document.getElementById("darker_button").addEventListener("click", function() {
-    CS.set_color(CS.colorlib.get_darker(CS.color))
+    App.set_color(App.colorlib.get_darker(App.color))
   })
   
   document.getElementById("lighter_button").addEventListener("click", function() {
-    CS.set_color(CS.colorlib.get_lighter(CS.color))
+    App.set_color(App.colorlib.get_lighter(App.color))
   })
 
   document.getElementById("exact_button").addEventListener("click", function() {
@@ -37,8 +43,37 @@ CS.init = function() {
     let reference = document.getElementById("reference")
     reference.style.color = input
     let color = window.getComputedStyle(reference).color
-    CS.set_color(color)
+    App.set_color(color)
   }) 
 
-  CS.set_color(CS.color)
+  App.state = App.get_local_storage(App.ls_state) || {}
+  
+  if (App.state.color) {
+    App.color = App.state.color
+  }
+
+  App.set_color(App.color)
+}
+
+// Centralized function to get localStorage objects
+App.get_local_storage = function (ls_name) {
+  let obj
+
+  if (localStorage[ls_name]) {
+    try {
+      obj = JSON.parse(localStorage.getItem(ls_name))
+    } catch (err) {
+      localStorage.removeItem(ls_name)
+      obj = null
+    }
+  } else {
+    obj = null
+  }
+
+  return obj
+}
+
+// Centralized function to save localStorage objects
+App.save_local_storage = function (ls_name, obj) {
+  localStorage.setItem(ls_name, JSON.stringify(obj))
 }

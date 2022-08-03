@@ -43,7 +43,7 @@ body, html {
 }
 
 #buttons div:hover {
-  outline: 4px solid currentColor;
+  outline: 2px solid currentColor;
 }
 
 .unselectable {

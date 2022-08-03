@@ -146,7 +146,7 @@ const ColorLib = (function () {
 			}
     }    
 
-    instance.get_lighter = function (rgb, amount = 0.4) {
+    instance.get_lighter = function (rgb, amount = 0.2) {
 			let mode = "rgb"
 
 			if (rgb.startsWith("#")) {

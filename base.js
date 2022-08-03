@@ -1,18 +1,45 @@
 const App = {}
 App.ls_state = "state_v1"
 App.colorlib = ColorLib()
-App.color = "#252933"
+App.default_color = "#252933"
+
+App.init = function() {
+  App.el("#fullscreen_button").addEventListener("click", function() {
+    App.toggle_fullscreen()
+  })
+
+  App.el("#random_button").addEventListener("click", function() {
+    App.set_color(App.colorlib.get_random_hex())
+  })
+
+  App.el("#darker_button").addEventListener("click", function() {
+    App.set_color(App.colorlib.get_darker(App.get_reference()))
+  })
+  
+  App.el("#lighter_button").addEventListener("click", function() {
+    App.set_color(App.colorlib.get_lighter(App.get_reference()))
+  })
+
+  App.el("#exact_button").addEventListener("click", function() {
+    App.get_exact_color()
+  }) 
+
+  App.state = App.get_local_storage(App.ls_state) || {}
+  App.set_color(App.state.color || App.default_color)
+}
 
 App.set_color = function (color) {
+  App.set_reference(color)
+  color = App.get_reference()
+
   if (color.startsWith("#")) {
     color = App.colorlib.hex_to_rgb(color)
   }
   
-  let buttons = document.getElementById("buttons")
+  let buttons = App.el("#buttons")
   buttons.style.color = App.colorlib.get_lighter_or_darker(color, 0.4)
   document.documentElement.style.setProperty("--bg_color", color)
   App.save_local_storage(App.ls_state, {color: color})
-  App.color = color
 }
 
 App.toggle_fullscreen = function () {
@@ -23,50 +50,24 @@ App.toggle_fullscreen = function () {
   }  
 }
 
+App.set_reference = function (color) {
+  App.el("#reference").style.color = color
+}
+
+App.get_reference = function () {
+  return window.getComputedStyle(App.el("#reference")).color
+}
+
 App.get_exact_color = function () {
   let input = prompt("Enter color name, rgb, or hex")
 
   if (!input) {
     return
   }
-  
-  let reference = document.getElementById("reference")
-  reference.style.color = input
-  let color = window.getComputedStyle(reference).color
-  App.set_color(color)  
+
+  App.set_color(input)
 }
 
-App.init = function() {
-  document.getElementById("fullscreen_button").addEventListener("click", function() {
-    App.toggle_fullscreen()
-  })
-
-  document.getElementById("random_button").addEventListener("click", function() {
-    App.set_color(App.colorlib.get_random_hex())
-  })
-
-  document.getElementById("darker_button").addEventListener("click", function() {
-    App.set_color(App.colorlib.get_darker(App.color))
-  })
-  
-  document.getElementById("lighter_button").addEventListener("click", function() {
-    App.set_color(App.colorlib.get_lighter(App.color))
-  })
-
-  document.getElementById("exact_button").addEventListener("click", function() {
-    App.get_exact_color()
-  }) 
-
-  App.state = App.get_local_storage(App.ls_state) || {}
-  
-  if (App.state.color) {
-    App.color = App.state.color
-  }
-
-  App.set_color(App.color)
-}
-
-// Centralized function to get localStorage objects
 App.get_local_storage = function (ls_name) {
   let obj
 
@@ -84,7 +85,14 @@ App.get_local_storage = function (ls_name) {
   return obj
 }
 
-// Centralized function to save localStorage objects
 App.save_local_storage = function (ls_name, obj) {
   localStorage.setItem(ls_name, JSON.stringify(obj))
+}
+
+App.el = function (query, root = document) {
+  return root.querySelector(query)
+}
+
+App.els = function (query, root = document) {
+  return Array.from(root.querySelectorAll(query))
 }

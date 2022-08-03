@@ -42,6 +42,10 @@ body, html {
   cursor: pointer;
 }
 
+#buttons div:hover {
+  outline: 4px solid currentColor;
+}
+
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

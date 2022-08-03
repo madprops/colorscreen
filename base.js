@@ -1,10 +1,12 @@
 const CS = {}
 CS.colorlib = ColorLib()
+CS.color = "#000000"
 
 CS.set_color = function (color) {
   let buttons = document.getElementById("buttons")
   buttons.style.color = CS.colorlib.get_lighter_or_darker(color, 0.4)
   document.documentElement.style.setProperty("--bg_color", color)
+  CS.color = color
 }
 
 CS.init = function() {
@@ -24,5 +26,13 @@ CS.init = function() {
     CS.set_color(CS.colorlib.get_random_hex())
   })
 
-  CS.set_color(window.getComputedStyle(main).backgroundColor)
+  document.getElementById("darker_button").addEventListener("click", function() {
+    CS.set_color(CS.colorlib.get_darker(CS.color))
+  })
+  
+  document.getElementById("lighter_button").addEventListener("click", function() {
+    CS.set_color(CS.colorlib.get_lighter(CS.color))
+  })  
+
+  CS.set_color(CS.color)
 }

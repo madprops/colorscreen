@@ -15,15 +15,30 @@ App.set_color = function (color) {
   App.color = color
 }
 
+App.toggle_fullscreen = function () {
+  if(document.fullscreenElement) {
+    document.exitFullscreen()
+  } else {
+    document.documentElement.requestFullscreen()
+  }  
+}
+
+App.get_exact_color = function () {
+  let input = prompt("Enter color name, rgb, or hex")
+
+  if (!input) {
+    return
+  }
+  
+  let reference = document.getElementById("reference")
+  reference.style.color = input
+  let color = window.getComputedStyle(reference).color
+  App.set_color(color)  
+}
+
 App.init = function() {
   document.getElementById("fullscreen_button").addEventListener("click", function() {
-    if(document.fullscreenElement) {
-      document.exitFullscreen()
-    }
-
-    else {
-      document.documentElement.requestFullscreen()
-    }
+    App.toggle_fullscreen()
   })
 
   document.getElementById("random_button").addEventListener("click", function() {
@@ -39,11 +54,7 @@ App.init = function() {
   })
 
   document.getElementById("exact_button").addEventListener("click", function() {
-    let input = prompt("Enter color name, rgb, or hex")
-    let reference = document.getElementById("reference")
-    reference.style.color = input
-    let color = window.getComputedStyle(reference).color
-    App.set_color(color)
+    App.get_exact_color()
   }) 
 
   App.state = App.get_local_storage(App.ls_state) || {}

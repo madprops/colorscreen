@@ -11,6 +11,7 @@ body, html {
   align-items: center;
   justify-content: center;
   font-family: sans-serif;
+  font-size: 18px;
 }
 
 #main {
@@ -29,6 +30,7 @@ body, html {
   gap: 1rem;
   opacity: 0;
   transition: opacity 250ms;
+  font-size: 2rem;
 }
 
 #buttons:hover {
@@ -36,7 +38,7 @@ body, html {
 }
 
 #buttons div {
-  font-size: 40px;
+  font-size: ;
   border: 4px solid currentColor;
   padding: 10px;
   cursor: pointer;

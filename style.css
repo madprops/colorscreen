@@ -44,6 +44,7 @@ body, html {
   text-align: center;
   padding-left: 2rem;
   padding-right: 2rem;
+  user-select: none;
 }
 
 .button:hover {
@@ -53,13 +54,4 @@ body, html {
 #color_info {
   font-size: 1rem;
   text-align: center;
-}
-
-.unselectable {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }

@@ -1,5 +1,6 @@
 :root {
-  --bg_color: black;
+  --color_1: black;
+  --color_2: white;
 }		
 
 body, html {
@@ -15,7 +16,7 @@ body, html {
 }
 
 #main {
-  background-color: var(--bg_color);
+  background-color: var(--color_1);
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -30,6 +31,7 @@ body, html {
   gap: 1rem;
   opacity: 0;
   transition: opacity 250ms;
+  color: var(--color_2);
 }
 
 #buttons:hover {

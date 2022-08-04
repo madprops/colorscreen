@@ -30,11 +30,12 @@ App.init = function() {
 
 App.set_color = function (color) {
   App.set_reference(color)
-  color = App.get_reference()
-  App.el("#buttons").style.color = App.colorlib.get_lighter_or_darker(color, 0.4)
-  document.documentElement.style.setProperty("--bg_color", color)
-  App.save_local_storage(App.ls_state, {color: color})
-  App.el("#color_info").textContent = color
+  let color_1 = App.get_reference()
+  let color_2 = App.colorlib.get_lighter_or_darker(color, 0.5)
+  document.documentElement.style.setProperty("--color_1", color_1)
+  document.documentElement.style.setProperty("--color_2", color_2)
+  App.save_local_storage(App.ls_state, {color: color_1})
+  App.el("#color_info").textContent = color_1
 }
 
 App.toggle_fullscreen = function () {

@@ -34,6 +34,7 @@ App.set_color = function (color) {
   App.el("#buttons").style.color = App.colorlib.get_lighter_or_darker(color, 0.4)
   document.documentElement.style.setProperty("--bg_color", color)
   App.save_local_storage(App.ls_state, {color: color})
+  App.el("#color_info").textContent = color
 }
 
 App.toggle_fullscreen = function () {

@@ -57,3 +57,11 @@ body, html {
   font-size: 1rem;
   text-align: center;
 }
+
+.flex_row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}

@@ -40,18 +40,19 @@ body, html {
 
 .button {
   font-size: 1.4rem;
-  border: 3px solid currentColor;
-  padding: 10px;
+  border: 2px solid currentColor;
   cursor: pointer;
   text-align: center;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   user-select: none;
   flex-basis: 100%;
 }
 
 .button:hover {
-  outline: 3px solid currentColor;
+  outline: 2px solid currentColor;
 }
 
 #color_info {

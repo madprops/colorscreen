@@ -13,11 +13,11 @@ App.init = function() {
   })
 
   App.el("#darker_button").addEventListener("click", function() {
-    App.set_color(App.colorlib.get_darker(App.get_reference()))
+    App.set_color(App.colorlib.get_darker(App.get_reference(), 0.15))
   })
   
   App.el("#lighter_button").addEventListener("click", function() {
-    App.set_color(App.colorlib.get_lighter(App.get_reference()))
+    App.set_color(App.colorlib.get_lighter(App.get_reference(), 0.15))
   })
 
   App.el("#exact_button").addEventListener("click", function() {

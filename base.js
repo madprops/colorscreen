@@ -25,23 +25,23 @@ App.init = function() {
   }) 
 
   App.el("#red_button").addEventListener("click", function() {
-    App.set_color("red")
+    App.set_color("rgb(255, 0, 0)")
   })   
 
   App.el("#green_button").addEventListener("click", function() {
-    App.set_color("green")
+    App.set_color("rgb(0, 255, 0)")
   }) 
 
   App.el("#blue_button").addEventListener("click", function() {
-    App.set_color("blue")
+    App.set_color("rgb(0, 0, 255)")
   }) 
 
   App.el("#black_button").addEventListener("click", function() {
-    App.set_color("black")
+    App.set_color("rgb(0, 0, 0)")
   }) 
 
   App.el("#white_button").addEventListener("click", function() {
-    App.set_color("white")
+    App.set_color("rgb(255, 255, 255)")
   }) 
 
   App.state = App.get_local_storage(App.ls_state) || {}

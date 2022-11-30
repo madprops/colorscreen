@@ -34,10 +34,6 @@ body, html {
   color: var(--color_2);
 }
 
-#buttons:hover {
-  opacity: 1;
-}
-
 .button {
   font-size: 1.4rem;
   border: 2px solid currentColor;
@@ -53,6 +49,11 @@ body, html {
 
 .button:hover {
   outline: 2px solid currentColor;
+}
+
+.visible {
+  opacity: 1 !important;
+  pointer-events: all !important;
 }
 
 #color_info {

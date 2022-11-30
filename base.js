@@ -2,47 +2,74 @@ const App = {}
 App.ls_state = "state_v1"
 App.colorlib = ColorLib()
 App.default_color = "#252933"
+App.visible = false
 
 App.init = function() {
   App.el("#fullscreen_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.toggle_fullscreen()
   })
 
   App.el("#random_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color(App.colorlib.get_random_hex())
   })
 
   App.el("#darker_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color(App.colorlib.get_darker(App.get_reference(), 0.15))
   })
   
   App.el("#lighter_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color(App.colorlib.get_lighter(App.get_reference(), 0.15))
   })
 
   App.el("#exact_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.get_exact_color()
   }) 
 
   App.el("#red_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color("rgb(255, 0, 0)")
   })   
 
   App.el("#green_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color("rgb(0, 255, 0)")
   }) 
 
   App.el("#blue_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color("rgb(0, 0, 255)")
   }) 
 
   App.el("#black_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color("rgb(0, 0, 0)")
   }) 
 
   App.el("#white_button").addEventListener("click", function() {
+    if (!App.visible) {return}
     App.set_color("rgb(255, 255, 255)")
   }) 
+  
+  App.el("#buttons").addEventListener("mouseenter", function () {
+    clearTimeout(App.show_timeout)
+
+    App.show_timeout = setTimeout(function () {
+      App.el("#buttons").classList.add("visible")
+      App.visible = true
+    }, 500)
+  })
+
+  App.el("#buttons").addEventListener("mouseleave", function () {
+    clearTimeout(App.show_timeout)
+
+    App.el("#buttons").classList.remove("visible")
+    App.visible = false
+  })
 
   App.state = App.get_local_storage(App.ls_state) || {}
   App.set_color(App.state.color || App.default_color)

@@ -131,11 +131,3 @@ App.get_local_storage = function (ls_name) {
 App.save_local_storage = function (ls_name, obj) {
   localStorage.setItem(ls_name, JSON.stringify(obj))
 }
-
-App.el = function (query, root = document) {
-  return root.querySelector(query)
-}
-
-App.els = function (query, root = document) {
-  return Array.from(root.querySelectorAll(query))
-}
